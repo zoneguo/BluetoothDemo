@@ -20,9 +20,15 @@ public class BluetoothStatusReceiver extends BroadcastReceiver {
         }
 
         if (action.equals(BluetoothDevice.ACTION_ACL_CONNECTED)) {
-
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (device != null) {
+                Log.d(TAG, "[onReceive] connected device " + device.getName());
+            }
         } else if (action.equals(BluetoothDevice.ACTION_ACL_DISCONNECTED)) {
-
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (device != null) {
+                Log.d(TAG, "[onReceive] disconnected device " + device.getName());
+            }
         }
     }
 
