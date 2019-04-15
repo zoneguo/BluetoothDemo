@@ -24,19 +24,30 @@ public class BluetoothProfileMonitor {
         return SingletonHolder.INSTANCE;
     }
 
-    public boolean start() {
+    public boolean getProfile() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
-            Log.d(TAG, "[start] bluetooth is disabled");
+            Log.d(TAG, "[getProfile] bluetooth is disabled");
             return false;
         }
 
-        Log.d(TAG, "[start] A2DP = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.A2DP));
-        Log.d(TAG, "[start] HEADSET = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.HEADSET));
-        Log.d(TAG, "[start] GATT = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.GATT));
-        Log.d(TAG, "[start] GATT_SERVER = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.GATT_SERVER));
+        Log.d(TAG, "[getProfile] A2DP = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.A2DP));
+        Log.d(TAG, "[getProfile] HEADSET = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.HEADSET));
+        Log.d(TAG, "[getProfile] GATT = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.GATT));
+        Log.d(TAG, "[getProfile] GATT_SERVER = " + bluetoothAdapter.getProfileProxy(MyApplication.getAppContext(), mServiceListener, BluetoothProfile.GATT_SERVER));
 
         return true;
+    }
+
+    public void getProfileStatus() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Log.d(TAG, "[getProfileStatus] bluetooth is disabled");
+            return;
+        }
+
+        Log.d(TAG, "[getProfileStatus] A2DP = " + bluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP));
+        Log.d(TAG, "[getProfileStatus] HEADSET = " + bluetoothAdapter.getProfileConnectionState(BluetoothProfile.HEADSET));
     }
 
     private BluetoothProfile.ServiceListener mServiceListener = new BluetoothProfile.ServiceListener() {

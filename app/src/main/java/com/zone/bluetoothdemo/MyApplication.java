@@ -1,11 +1,9 @@
 package com.zone.bluetoothdemo;
 
 import android.app.Application;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
-import com.zone.bluetoothdemo.receiver.BluetoothProfileMonitor;
 import com.zone.bluetoothdemo.receiver.BluetoothStatusReceiver;
 
 public class MyApplication extends Application {
@@ -26,7 +24,6 @@ public class MyApplication extends Application {
 
     private void init() {
         registerBTReceiver();
-        BluetoothProfileMonitor.getInstance().start();
     }
 
     private void registerBTReceiver() {

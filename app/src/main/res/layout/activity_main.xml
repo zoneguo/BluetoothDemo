@@ -12,4 +12,10 @@
         android:layout_height="wrap_content"
         android:text="获取已连接蓝牙设备" />
 
+    <Button
+        android:id="@+id/btn_get_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取已连接Profile" />
+
 </LinearLayout>
