@@ -1,6 +1,8 @@
 package com.zone.bluetoothdemo;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,12 +26,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button mBtnGetProfile;
 
+    private AudioManager mAudioManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initUI();
+
+        initVars();
     }
 
     private void initUI() {
@@ -40,16 +46,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnGetProfile.setOnClickListener(this);
     }
 
+    private void initVars() {
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_get_connected_bt:
+                int volume = mAudioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
                 getConnectedBTList();
                 break;
 
             case R.id.btn_get_profile:
                 BluetoothProfileMonitor.getInstance().getProfile();
                 BluetoothProfileMonitor.getInstance().getProfileStatus();
+                mAudioManager.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL,
+                        AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND
+                                | AudioManager.FLAG_SHOW_UI);
                 break;
         }
     }
